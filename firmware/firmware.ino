@@ -47,8 +47,6 @@ byte mac[] = {0x90, 0xA2, 0xDA, 0x00, 0x65, 0x52};
 EthernetClient ethClient;
 
 // MQTT setup 
-char mqttserver[] = "actse.bdstr.reaktor23.org";
-int mqttport = 1883;
 long mqttlastconnect = 0;
 PubSubClient mqttClient(ethClient);
 
@@ -86,11 +84,9 @@ void mqtt_connect() {
       if (mqttClient.connected()) {
         mqttlastconnect = 0;
       } else {
-        
         mqttClient.connect("powerCMDer", username, password);
         mqttClient.subscribe("powerCMDer/server");
         mqttClient.subscribe("powerCMDer/outlets");
-        mqttClient.subscribe("powerCMDer/temperature");
       }
     } else {
       Serial.println("MQTT connection failed!");
